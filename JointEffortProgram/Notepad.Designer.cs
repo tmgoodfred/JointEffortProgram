@@ -33,8 +33,8 @@
             this.noteEntryTxt = new System.Windows.Forms.TextBox();
             this.submitBtn = new System.Windows.Forms.Button();
             this.blankSlateBtn = new System.Windows.Forms.Button();
-            this.refreshDataBtn = new System.Windows.Forms.Button();
             this.previousEntryBtn = new System.Windows.Forms.Button();
+            this.nextEntryBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // outputTxt
@@ -67,7 +67,7 @@
             // 
             // submitBtn
             // 
-            this.submitBtn.Location = new System.Drawing.Point(363, 393);
+            this.submitBtn.Location = new System.Drawing.Point(314, 393);
             this.submitBtn.Name = "submitBtn";
             this.submitBtn.Size = new System.Drawing.Size(75, 23);
             this.submitBtn.TabIndex = 3;
@@ -77,7 +77,7 @@
             // 
             // blankSlateBtn
             // 
-            this.blankSlateBtn.Location = new System.Drawing.Point(505, 393);
+            this.blankSlateBtn.Location = new System.Drawing.Point(408, 393);
             this.blankSlateBtn.Name = "blankSlateBtn";
             this.blankSlateBtn.Size = new System.Drawing.Size(75, 23);
             this.blankSlateBtn.TabIndex = 4;
@@ -85,19 +85,9 @@
             this.blankSlateBtn.UseVisualStyleBackColor = true;
             this.blankSlateBtn.Click += new System.EventHandler(this.blankSlateBtn_Click);
             // 
-            // refreshDataBtn
-            // 
-            this.refreshDataBtn.Location = new System.Drawing.Point(681, 41);
-            this.refreshDataBtn.Name = "refreshDataBtn";
-            this.refreshDataBtn.Size = new System.Drawing.Size(107, 23);
-            this.refreshDataBtn.TabIndex = 5;
-            this.refreshDataBtn.Text = "Refresh To Latest";
-            this.refreshDataBtn.UseVisualStyleBackColor = true;
-            this.refreshDataBtn.Click += new System.EventHandler(this.refreshDataBtn_Click);
-            // 
             // previousEntryBtn
             // 
-            this.previousEntryBtn.Location = new System.Drawing.Point(200, 393);
+            this.previousEntryBtn.Location = new System.Drawing.Point(186, 393);
             this.previousEntryBtn.Name = "previousEntryBtn";
             this.previousEntryBtn.Size = new System.Drawing.Size(94, 23);
             this.previousEntryBtn.TabIndex = 6;
@@ -105,13 +95,23 @@
             this.previousEntryBtn.UseVisualStyleBackColor = true;
             this.previousEntryBtn.Click += new System.EventHandler(this.previousEntryBtn_Click);
             // 
+            // nextEntryBtn
+            // 
+            this.nextEntryBtn.Location = new System.Drawing.Point(518, 393);
+            this.nextEntryBtn.Name = "nextEntryBtn";
+            this.nextEntryBtn.Size = new System.Drawing.Size(94, 23);
+            this.nextEntryBtn.TabIndex = 7;
+            this.nextEntryBtn.Text = "Next Entry";
+            this.nextEntryBtn.UseVisualStyleBackColor = true;
+            this.nextEntryBtn.Click += new System.EventHandler(this.nextEntryBtn_Click);
+            // 
             // Notepad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.nextEntryBtn);
             this.Controls.Add(this.previousEntryBtn);
-            this.Controls.Add(this.refreshDataBtn);
             this.Controls.Add(this.blankSlateBtn);
             this.Controls.Add(this.submitBtn);
             this.Controls.Add(this.noteEntryTxt);
@@ -131,7 +131,7 @@
         private TextBox noteEntryTxt;
         private Button submitBtn;
         private Button blankSlateBtn;
-        private Button refreshDataBtn;
         private Button previousEntryBtn;
+        private Button nextEntryBtn;
     }
 }
