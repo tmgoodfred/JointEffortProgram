@@ -1,6 +1,6 @@
 ﻿namespace JointEffortProgram
 {
-    partial class Form1
+    partial class Notepad
     {
         /// <summary>
         ///  Required designer variable.
@@ -105,7 +105,7 @@
             this.previousEntryBtn.UseVisualStyleBackColor = true;
             this.previousEntryBtn.Click += new System.EventHandler(this.previousEntryBtn_Click);
             // 
-            // Form1
+            // Notepad
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -117,8 +117,8 @@
             this.Controls.Add(this.noteEntryTxt);
             this.Controls.Add(this.refreshFileBtn);
             this.Controls.Add(this.outputTxt);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "Notepad";
+            this.Text = "Notepad";
             this.ResumeLayout(false);
             this.PerformLayout();
 
