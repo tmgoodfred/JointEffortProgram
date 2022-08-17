@@ -129,6 +129,7 @@ namespace JointEffortProgram
 
                 noteEntryTxt.Text = dataEntry;
                 outputTxt.Text = dateTime.ToString();
+
                 currentEntry -= 2;
             }
             else
