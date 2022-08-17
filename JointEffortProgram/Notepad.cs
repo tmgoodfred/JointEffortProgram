@@ -127,9 +127,8 @@ namespace JointEffortProgram
                 string dateTime = data[lastEntry + 1];
                 string dataEntry = data[lastEntry];
 
-                currentDate = DateTime.Parse(dateTime);
                 noteEntryTxt.Text = dataEntry;
-                outputTxt.Text = currentDate.ToString();
+                outputTxt.Text = dateTime.ToString();
                 currentEntry -= 2;
             }
             else
@@ -148,9 +147,8 @@ namespace JointEffortProgram
                 string dateTime = data[lastEntry + 1];
                 string dataEntry = data[lastEntry];
 
-                currentDate = DateTime.Parse(dateTime);
                 noteEntryTxt.Text = dataEntry;
-                outputTxt.Text = currentDate.ToString();
+                outputTxt.Text = dateTime.ToString();
                 currentEntry += 2;
             }
             else
