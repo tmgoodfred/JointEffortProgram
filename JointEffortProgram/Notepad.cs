@@ -39,33 +39,44 @@ namespace JointEffortProgram
         {
             DateTime todaysDate = DateTime.Now; //this is a DateTime variable, this specifically handes dates and times. It has a method called "Now" that gets the current date and time.
             string text = todaysDate.ToString();    //this sets a string to the DateTime variable, but you can't just set todaysDate to a string, you have to convert it to a string. This is done with the method ".ToString();"
-
-            if (new FileInfo("date.txt").Length < 3)   //this will check to see if a file is empty, if it is, we want to create a new file. If not, we only want to read the info from it, not replace it.
+            try    //try catch is like this: "hey, try to do this, if you can't, catch and throw this error or message"
             {
-                await File.WriteAllTextAsync("date.txt", text + Environment.NewLine); //await works with async, it's not needed if you aren't doing async. But this is creating a new file called date.txt and putting the string into it.
-                //the location of this file will be: "C:\Users\***YOURUSERNAMEHERE***\source\repos\JointEffortProgram\JointEffortProgram\bin\Debug\net6.0-windows\date.txt"
-                currentDate = todaysDate; //here I am setting the variable currentDate to the date we just got from the method for consistency.
-                outputTxt.Text = currentDate.ToString();
-                currentEntry = 1;
+                var data2 = File.ReadAllLines("date.txt");
+
+                if (data2.Length < 3)   //this will check to see if a file is empty, if it is, we want to create a new file. If not, we only want to read the info from it, not replace it.
+                {
+                    await File.WriteAllTextAsync("date.txt", text + Environment.NewLine); //await works with async, it's not needed if you aren't doing async. But this is creating a new file called date.txt and putting the string into it.
+                                                                                          //the location of this file will be: "C:\Users\***YOURUSERNAMEHERE***\source\repos\JointEffortProgram\JointEffortProgram\bin\Debug\net6.0-windows\date.txt"
+                    currentDate = todaysDate; //here I am setting the variable currentDate to the date we just got from the method for consistency.
+                    outputTxt.Text = currentDate.ToString();
+                    currentEntry = 1;
+                }
+                else
+                {
+                    //read the file info, set it to whatever the last date in the file is.
+                    var data = File.ReadAllLines("date.txt");       //this is an array of all the lines in the text file
+                    currentEntry = data.Length;
+                    string dateTime = data[data.Length - 1];    //this is the line that has the date time
+                    string dataEntry = data[data.Length - 2];   //this is the line that has the entry from the text box
+
+                    currentDate = DateTime.Parse(dateTime);  //this converts the string to a DateTime and then sets it to our current variable
+                    noteEntryTxt.Text = dataEntry;  //this sets the info in the text box to the latest entry in the file
+                    outputTxt.Text = currentDate.ToString();    //this sets the date time text box to the most recent time
+                }
             }
-            else
+            catch
             {
-                //read the file info, set it to whatever the last date in the file is.
-                var data = File.ReadAllLines("date.txt");       //this is an array of all the lines in the text file
-                currentEntry = data.Length;
-                string dateTime = data[data.Length - 1];    //this is the line that has the date time
-                string dataEntry = data[data.Length - 2];   //this is the line that has the entry from the text box
-
-                currentDate = DateTime.Parse(dateTime);  //this converts the string to a DateTime and then sets it to our current variable
-                noteEntryTxt.Text = dataEntry;  //this sets the info in the text box to the latest entry in the file
-                outputTxt.Text = currentDate.ToString();    //this sets the date time text box to the most recent time
+                MessageBox.Show("uh oh file not found");
             }
         }
 
         private void refreshFileBtn_Click(object sender, EventArgs e) //this is the action event for when you press the clearfile button
         {
             File.Create("date.txt").Close();    //this clears the contents of the file by overwritting the existing one
-            //CreateAndUpdateFile();  //I call the CreateAndUpdateFile method to take our new empty file and get the most up to date time on it.
+            noteEntryTxt.Text = ""; //this just sets the text box to empty for the user
+            outputTxt.Text = "";
+            currentEntry = 0;
+            lastEntry = 0;
         }
 
         private void submitBtn_Click(object sender, EventArgs e)
@@ -99,50 +110,26 @@ namespace JointEffortProgram
         {
             noteEntryTxt.Text = ""; //this just sets the text box to empty for the user
             outputTxt.Text = "";
-            currentEntry = 0;
-            lastEntry = 0;
         }
 
         private void previousEntryBtn_Click(object sender, EventArgs e)
         {
-            var data = File.ReadAllLines("date.txt");       //this is an array of all the lines in the text file
-
-            if (currentEntry >= 5)
-            {
-                lastEntry = currentEntry - 4;
-                string dateTime = data[lastEntry + 1];
-                string dataEntry = data[lastEntry];
-
-                currentDate = DateTime.Parse(dateTime);
-                noteEntryTxt.Text = dataEntry;
-                outputTxt.Text = currentDate.ToString();
-                currentEntry -= 2;
-            }
-            else
-            {
-                MessageBox.Show("Not Enough Entries!");
-            }
+            //Edward, this is what I want you to work on.
+            /*
+             * What should happen here is that when you press the button it should go to the last entry in the file IF IT EXISTS.
+             * so my hints as to what to do are as follows:
+             * make an if/else statement to check to see if the file has more than 5 lines of text.
+             * The reason it's 5 is because in the file the first thing that should be there is the DateTime of the file creation.
+             * The next 2 items come as a pair and that's the text entry plus the date time of that text entry.
+             * so whenever you add an entry, it adds 2 lines. If we're going back into the past, we want at least 2 entries, so those plus the initial line are 5 total.
+             * 
+             * if there's more than 5, take the line data from the strings and output it!
+             */
         }
 
         private void nextEntryBtn_Click(object sender, EventArgs e)
         {
-            var data = File.ReadAllLines("date.txt");       //this is an array of all the lines in the text file
 
-            if (currentEntry < data.Length - 1)
-            {
-                lastEntry = currentEntry;
-                string dateTime = data[lastEntry + 1];
-                string dataEntry = data[lastEntry];
-
-                currentDate = DateTime.Parse(dateTime);
-                noteEntryTxt.Text = dataEntry;
-                outputTxt.Text = currentDate.ToString();
-                currentEntry += 2;
-            }
-            else
-            {
-                MessageBox.Show("No Future Entries!");
-            }
         }
     }
 }
