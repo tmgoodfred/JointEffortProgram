@@ -66,7 +66,12 @@ namespace JointEffortProgram
             }
             catch
             {
-                MessageBox.Show("uh oh file not found");
+                MessageBox.Show("file being made");
+                await File.WriteAllTextAsync("date.txt", text + Environment.NewLine); //await works with async, it's not needed if you aren't doing async. But this is creating a new file called date.txt and putting the string into it.
+                                                                                                                               //the location of this file will be: "C:\Users\***YOURUSERNAMEHERE***\source\repos\JointEffortProgram\JointEffortProgram\bin\Debug\net6.0-windows\date.txt"
+                currentDate = todaysDate; //here I am setting the variable currentDate to the date we just got from the method for consistency.
+                outputTxt.Text = currentDate.ToString();
+                currentEntry = 1;
             }
         }
 
