@@ -130,11 +130,42 @@ namespace JointEffortProgram
              * 
              * if there's more than 5, take the line data from the strings and output it!
              */
+
+            var data = File.ReadAllLines("date.txt");
+            if (currentEntry >= 5)
+            {
+                lastEntry = currentEntry - 4;
+                string dateTime = data[lastEntry + 1];
+                string dataEntry = data[lastEntry];
+
+                currentDate = DateTime.Parse(dateTime);
+                noteEntryTxt.Text = dataEntry;
+                outputTxt.Text = currentDate.ToString();
+                currentEntry -= 2;
+            }
+            else
+            {
+                MessageBox.Show("Not Enough Entries!");
+            }
         }
 
         private void nextEntryBtn_Click(object sender, EventArgs e)
         {
+            var data = File.ReadAllLines("date.txt");
+            if (currentEntry < data.Length - 1)
+            {
+                lastEntry = currentEntry;
+                string dateTime = data[lastEntry + 1];
+                string dataEntry = data[lastEntry];
 
+                noteEntryTxt.Text = dataEntry;
+                outputTxt.Text = dateTime.ToString();
+                currentEntry += 2;
+            }
+            else
+            {
+                MessageBox.Show("No Future Entries!");
+            }
         }
     }
 }
